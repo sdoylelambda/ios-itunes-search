@@ -1,6 +1,6 @@
 import UIKit
 
-class SearchResultsTableViewController: UITableViewController {
+class SearchResultsTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -9,6 +9,7 @@ class SearchResultsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         tableView.reloadData()
     }
 

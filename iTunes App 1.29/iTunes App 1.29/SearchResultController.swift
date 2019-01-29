@@ -1,12 +1,12 @@
 import Foundation
 
-class SearchResultsController {
+class SearchResultController {
     
     let baseURL = URL(string: "https://itunes.apple.com/search")!
     
     var searchResults: [SearchResult] = []
     
-    static let shared = SearchResultsController()
+    static let shared = SearchResultController()
     
     typealias completetionHandler = (Error?) -> Void
     
@@ -21,7 +21,7 @@ class SearchResultsController {
         let resultTypeQueryItem = URLQueryItem(name: "entity", value: resultType.rawValue)
         urlComplonents?.queryItems = [searchQueryItems, resultTypeQueryItem]
         
-        guard let request = urlComplonents?.url else {
+        guard let requestURL = urlComplonents?.url else {
             NSLog("Bad URL request")
             completion(NSError())
             return
@@ -43,7 +43,7 @@ class SearchResultsController {
             }
             
             do {
-                let searchResults = try JSONDecoder().decode(ResultsList.self, from: data)
+                let searchResults = try JSONDecoder().decode(SearchResults.self, from: data)
                 self.searchResults = searchResults.results
                 completion(NSError())
             } catch {
@@ -51,7 +51,5 @@ class SearchResultsController {
                 completion(NSError())
             }
         } .resume()
-        
     }
-    
 }

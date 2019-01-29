@@ -5,7 +5,7 @@ class SearchResultsTableViewController: UITableViewController, UISearchBarDelega
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let searchResultsController = SearchResultsController()
+    let searchResultsController = SearchResultController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

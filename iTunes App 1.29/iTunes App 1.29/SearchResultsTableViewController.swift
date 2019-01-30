@@ -2,6 +2,12 @@ import UIKit
 
 class SearchResultsTableViewController: UITableViewController, UISearchBarDelegate {
     
+    
+    @IBAction func screenChange(_ sender: Any) {
+        tableView.reloadData()
+        updateViews()
+    }
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -44,16 +50,12 @@ class SearchResultsTableViewController: UITableViewController, UISearchBarDelega
         } else if index == 2 {
             resultType = .movie
         }
-//
-//         let text = searchResultsController.searchResults[indexPath.row]
-//        text = searchResultsController.searchResults(searchTerm: search, resultType: resultType)
         
         searchResultsController.performSearch(searchTerm: search, resultType: resultType) { (_) in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

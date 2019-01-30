@@ -30,5 +30,34 @@ class SearchResultsTableViewController: UITableViewController, UISearchBarDelega
             return cell
     }
     
+    func updateViews() {
+        
+        guard let search = searchBar.text, search.count > 0 else { return }
+        
+        var resultType: ResultType!
+        let index = segmentedControl.selectedSegmentIndex
+        
+        if index == 0 {
+            resultType = .software
+        } else if index == 1 {
+            resultType = .musicTrack
+        } else if index == 2 {
+            resultType = .movie
+        }
+//
+//         let text = searchResultsController.searchResults[indexPath.row]
+//        text = searchResultsController.searchResults(searchTerm: search, resultType: resultType)
+        
+        searchResultsController.performSearch(searchTerm: search, resultType: resultType) { (_) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        updateViews()
+    }
 
 }
